@@ -133,3 +133,98 @@ inp.addEventListener("input", function () {
 btn.addEventListener("click", go);
 
 go();
+
+
+let game = document.getElementById("game");
+let word = document.getElementById("word");
+let btn2 = document.getElementById("gameStart");
+let scoreText = document.getElementById("score");
+let lifeText = document.getElementById("life");
+
+let words = list.join(" ").replace(/[.,]/g, "").split(" ");
+
+let drops = [];
+let score = 0;
+let life = 3;
+let t1;
+let t2;
+
+function gameStart() {
+    clearInterval(t1);
+    clearInterval(t2);
+
+    game.innerHTML = "";
+    drops = [];
+    score = 0;
+    life = 3;
+    scoreText.textContent = score;
+    lifeText.textContent = life;
+
+    word.value = "";
+    word.disabled = false;
+    word.focus();
+
+    t1 = setInterval(makeWord, 1500);
+    t2 = setInterval(moveWord, 50);
+}
+
+function makeWord() {
+    let w = words[Math.floor(Math.random() * words.length)];
+
+    let d = document.createElement("div");
+    d.textContent = w;
+    d.style.position = "absolute";
+    d.style.top = "0px";
+    d.style.left = Math.floor(Math.random() * (game.clientWidth - 120)) + "px";
+
+    game.appendChild(d);
+    drops.push({ el: d, y: 0, text: w });
+}
+
+function moveWord() {
+    for (let i = drops.length - 1; i >= 0; i--) {
+        drops[i].y += 2;
+        drops[i].el.style.top = drops[i].y + "px";
+
+        if (drops[i].y > game.clientHeight - 20) {
+            drops[i].el.remove();
+            drops.splice(i, 1);
+
+            life--;
+            lifeText.textContent = life;
+
+            if (life <= 0) {
+                gameOver();
+                return;
+            }
+        }
+    }
+}
+
+function gameOver() {
+    clearInterval(t1);
+    clearInterval(t2);
+    word.disabled = true;
+    alert("게임 끝! 점수: " + score);
+}
+
+word.addEventListener("keydown", function (e) {
+    if (e.key != "Enter") {
+        return;
+    }
+
+    for (let i = 0; i < drops.length; i++) {
+        if (drops[i].text == word.value.trim()) {
+            drops[i].el.remove();
+            drops.splice(i, 1);
+
+            score++;
+            scoreText.textContent = score;
+            break;
+        }
+    }
+
+    word.value = "";
+});
+
+btn2.addEventListener("click", gameStart);
