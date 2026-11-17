@@ -13,21 +13,47 @@ let box = document.getElementById("sentence");
 let inp = document.getElementById("typing");
 let res = document.getElementById("result");
 let btn = document.getElementById("restart");
+let num = document.getElementById("count");
+let fin = document.getElementById("final");
 
+let five = [];
+let n = 0;
 let text = "";
 let time = 0;
+let timer;
+
+let sumTasu = 0;
+let sumAcc = 0;
+let sumSec = 0;
 
 function go() {
-    let num = Math.floor(Math.random() * list.length);
-    text = list[num];
+    clearTimeout(timer);
+
+    five = list.slice().sort(function () {
+        return Math.random() - 0.5;
+    }).slice(0, 5);
+
+    n = 0;
+    sumTasu = 0;
+    sumAcc = 0;
+    sumSec = 0;
+
+    fin.style.display = "none";
+    show(0, 0, 0);
+    next();
+}
+
+function next() {
+    text = five[n];
     time = 0;
+
+    num.textContent = "문장 " + (n + 1) + " / 5";
 
     inp.value = "";
     inp.disabled = false;
     inp.focus();
 
     check();
-    show(0, 0, 0);
 }
 
 function check() {
@@ -57,6 +83,15 @@ function show(a, b, c) {
         "<p>시간: " + c + "초</p>";
 }
 
+function showFinal() {
+    fin.innerHTML =
+        "<h2>최종 결과</h2>" +
+        "<p>평균 타수: " + Math.round(sumTasu / 5) + "</p>" +
+        "<p>평균 정확도: " + Math.round(sumAcc / 5) + "%</p>" +
+        "<p>총 시간: " + sumSec.toFixed(1) + "초</p>";
+    fin.style.display = "block";
+}
+
 inp.addEventListener("input", function () {
     if (time == 0) {
         time = Date.now();
@@ -81,6 +116,17 @@ inp.addEventListener("input", function () {
 
         show(tasu, acc, sec.toFixed(1));
         inp.disabled = true;
+
+        sumTasu += tasu;
+        sumAcc += acc;
+        sumSec += sec;
+        n++;
+
+        if (n < 5) {
+            timer = setTimeout(next, 1000);
+        } else {
+            showFinal();
+        }
     }
 });
 
