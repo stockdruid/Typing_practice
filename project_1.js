@@ -228,3 +228,50 @@ word.addEventListener("keydown", function (e) {
 });
 
 btn2.addEventListener("click", gameStart);
+
+
+let title = document.querySelector("h1");
+
+window.onload = function () {
+    title.textContent = "타자연습 (준비 완료!)";
+    fitGame();
+};
+
+window.onresize = function () {
+    fitGame();
+};
+
+window.onscroll = function () {
+    if (window.scrollY > 300) {
+        document.body.style.backgroundColor = "lightblue";
+    } else {
+        document.body.style.backgroundColor = "lightyellow";
+    }
+};
+
+function fitGame() {
+    if (window.innerWidth < 750) {
+        game.style.width = (window.innerWidth - 50) + "px";
+    } else {
+        game.style.width = "700px";
+    }
+}
+
+
+inp.addEventListener("focus", function() {
+    inp.style.backgroundColor = "lightyellow";
+    inp.style.borderColor = "red";
+});
+
+inp.addEventListener("blur", function() {
+    inp.style.backgroundColor = "white";
+    inp.style.borderColor = "skyblue";
+});
+
+word.addEventListener("focus", function() {
+    word.style.backgroundColor = "lightgreen";
+});
+
+word.addEventListener("blur", function() {
+    word.style.backgroundColor = "white";
+});
