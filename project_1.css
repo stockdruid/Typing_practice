@@ -1,0 +1,116 @@
+body {
+    background-color: lightyellow;
+    font-family: "맑은 고딕";
+    text-align: center;
+}
+
+h1 {
+    color: blue;
+    font-size: 50px;
+    text-shadow: 2px 2px 2px gray;
+}
+
+h2 {
+    color: purple;
+}
+
+#count {
+    font-weight: bold;
+    color: red;
+    font-size: 20px;
+}
+
+#sentence {
+    background-color: white;
+    border: 3px dashed hotpink;
+    padding: 20px;
+    margin: 20px;
+    font-size: 25px;
+    font-family: "Courier New";
+}
+
+input {
+    width: 500px;
+    height: 30px;
+    font-size: 18px;
+    border: 2px solid skyblue;
+}
+
+#result {
+    background-color: lightgreen;
+    width: 300px;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+#result p {
+    margin: 5px;
+    font-size: 18px;
+}
+
+#final {
+    background-color: orange;
+    width: 300px;
+    margin: auto;
+    margin-top: 10px;
+    border: 3px solid red;
+    border-radius: 20px;
+}
+
+button {
+    background-color: orange;
+    color: white;
+    font-size: 20px;
+    padding: 10px 20px;
+    margin: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: red;
+}
+
+hr {
+    border: 2px solid black;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#score {
+    color: blue;
+    font-weight: bold;
+}
+
+#life {
+    color: red;
+    font-weight: bold;
+}
+
+#game {
+    width: 700px;
+    margin: 0 auto;
+    background-color: black;
+    border: 5px solid gray !important;
+}
+
+#game div {
+    color: lime;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#word {
+    margin-top: 20px;
+    border: 2px solid lime;
+}
+
+#gameStart {
+    background-color: green;
+}
+
+#gameStart:hover {
+    background-color: darkgreen;
+}
